@@ -1,22 +1,36 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.Data;
+using System.IO;
 using Npgsql;
 using Dapper;
 
-CreateHostBuilder(args).Build().Run();
+var config = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false)
+    .Build();
 
-static IHostBuilder CreateHostBuilder(string[] args) => Host
-    .CreateDefaultBuilder(args)
-    .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>())
-    .ConfigureLogging(logBuilder => logBuilder.ClearProviders());
+var builder = new WebHostBuilder()
+    .UseContentRoot(Directory.GetCurrentDirectory())
+    .UseConfiguration(config)
+    .UseDefaultServiceProvider(configure =>
+    {
+        configure.ValidateOnBuild = false;
+        configure.ValidateScopes = false;
+    })
+    .UseKestrel(options =>
+    {
+        options.ListenAnyIP(5000, c => c.Protocols = HttpProtocols.Http1);
+    })
+    .UseStartup<Startup>();
 
-record Fortune (int Id, string Message);
+builder.Build().Run();
+
+record Fortune(int Id, string Message);
 
 class Startup
 {
@@ -29,6 +43,7 @@ class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddRouting();
         services.AddScoped<IDbConnection>(_ => new NpgsqlConnection(_configuration.GetConnectionString("postgres")));
     }
 
@@ -40,7 +55,7 @@ class Startup
         {
             endpoints.MapGet("/", async context =>
             {
-                using var connection = context.RequestServices.GetRequiredService<IDbConnection>();
+                var connection = context.RequestServices.GetRequiredService<IDbConnection>();
                 var results = await connection.QueryAsync<Fortune>("SELECT * FROM fortune");
                 await context.Response.WriteAsJsonAsync(results);
             });
