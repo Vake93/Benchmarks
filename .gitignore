@@ -1,0 +1,12 @@
+### C# ###
+bin/
+obj/
+
+### JS ###
+/node_modules
+
+### Go ###
+*.exe
+*.dll
+*.so
+*.dylib
