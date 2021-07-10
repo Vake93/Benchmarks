@@ -30,13 +30,11 @@ func main() {
 	DB = database
 
 	app := gin.New()
-	app.GET("/", GetFortunes)
+	app.GET("/", func(c *gin.Context) {
+		var fortunes []Fortune
+		DB.Find(&fortunes)
+
+		c.JSON(http.StatusOK, fortunes)
+	})
 	app.Run(":5000")
-}
-
-func GetFortunes(c *gin.Context){
-	var fortunes []Fortune
-	DB.Find(&fortunes)
-
-	c.JSON(http.StatusOK, fortunes)
 }
