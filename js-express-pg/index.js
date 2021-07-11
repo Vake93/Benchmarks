@@ -5,7 +5,10 @@ const app = express();
 const port = 5000;
 
 const pool = new Pool({
-    connectionString: "postgresql://viq.api:viq.api.123@localhost:5432/fortunes?sslmode=disable",
+    connectionString: "postgresql://user:user@123@localhost:5432/fortunes?sslmode=disable",
+    max: 5,
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 2000,
 })
 
 app.use(express.json());

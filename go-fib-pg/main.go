@@ -15,7 +15,9 @@ type Fortune struct {
 
 func main() {
 
-	db, err := sql.Open("postgres", "postgresql://viq.api:viq.api.123@localhost:5432/fortunes?sslmode=disable")
+	db, err := sql.Open("postgres", "postgresql://user:user@123@localhost:5432/fortunes?sslmode=disable")
+	db.SetMaxOpenConns(100)
+	db.SetMaxIdleConns(100)
 
 	if err != nil {
 		log.Fatal(err)

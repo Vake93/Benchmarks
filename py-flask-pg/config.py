@@ -1,2 +1,2 @@
-SQLALCHEMY_DATABASE_URI = "postgresql://viq.api:viq.api.123@localhost:5432/fortunes"
+SQLALCHEMY_DATABASE_URI = "postgresql://user:user%40123@localhost:5432/fortunes?sslmode=disable"
 SQLALCHEMY_TRACK_MODIFICATIONS = False
