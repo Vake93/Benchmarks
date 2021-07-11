@@ -2,8 +2,6 @@ package main
 
 import (
 	"database/sql"
-	"log"
-
 	"github.com/gofiber/fiber/v2"
 	_ "github.com/lib/pq"
 )
@@ -13,40 +11,62 @@ type Fortune struct {
 	Message string `json:"message"`
 }
 
+type World struct {
+	Id      int    `json:"id"`
+	RandomNumber int `json:"randomNumber"`
+}
+
 func main() {
 
-	db, err := sql.Open("postgres", "postgresql://user:user@123@localhost:5432/fortunes?sslmode=disable")
+	db, _ := sql.Open("postgres", "postgresql://user:user@123@localhost:5432/fortunes?sslmode=disable")
 	db.SetMaxOpenConns(100)
 	db.SetMaxIdleConns(100)
 
-	if err != nil {
-		log.Fatal(err)
-	}
-
 	app := fiber.New()
 
-	app.Get("/", func(c *fiber.Ctx) error {
+	app.Get("/text", func(c *fiber.Ctx) error {
+		return c.SendString("Hello World")
+	})
 
-		rows, err := db.Query("SELECT id, message FROM fortune")
+	app.Get("/json", func(c *fiber.Ctx) error {
+		return c.JSON(Fortune{
+			Id: 1,
+			Message: "Hello World",
+		})
+	})
 
-		if err != nil {
-			return c.Status(500).SendString(err.Error())
-		}
+	app.Get("/single", func(c *fiber.Ctx) error {
 
 		var fortunes []Fortune
+		rows, _ := db.Query("SELECT id, message FROM fortune ORDER BY id")
 
 		for rows.Next() {
-
 			var fortune = Fortune{}
-			if err := rows.Scan(&fortune.Id, &fortune.Message); err != nil {
-				return err
-			}
-
+			rows.Scan(&fortune.Id, &fortune.Message)
 			fortunes = append(fortunes, fortune)
 		}
 
 		return c.JSON(fortunes)
 	})
 
-	log.Fatal(app.Listen(":5000"))
+	app.Get("/multiple", func(c *fiber.Ctx) error {
+
+		row := db.QueryRow("SELECT id, randomnumber FROM world WHERE id = 260")
+
+		var item World
+		row.Scan(&item.Id, &item.RandomNumber)
+
+		var results []World
+		rows, _ := db.Query("SELECT id, randomnumber FROM world WHERE randomnumber > $1 ORDER BY id", item.RandomNumber)
+
+		for rows.Next() {
+			var world = World{}
+			rows.Scan(&world.Id, &world.RandomNumber)
+			results = append(results, world)
+		}
+
+		return c.JSON(results)
+	})
+
+	app.Listen(":5000")
 }
