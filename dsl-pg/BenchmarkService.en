@@ -1,0 +1,38 @@
+using Dapper;
+using Npgsql;
+using System;
+
+service BenchmarkService;
+
+csharp
+{
+    private static readonly string connectionString = "Server=localhost;Database=fortunes;User Id=viq.api;Password=viq.api.123;Max Auto Prepare=5;No Reset On Close=true;Enlist=false;Multiplexing=true";
+
+    public record Fortune(int Id, string Message);
+	record World(int Id, int RandomNumber);
+}
+
+get "text" Ok<string> ()
+{
+    return Ok("Hello World");
+}
+
+get "json" Ok<Fortune> ()
+{
+    return Ok(new Fortune(1, "Hello World"));
+}
+
+get "single" Ok<Fortune[]> ()
+{
+	using var connection = new NpgsqlConnection(connectionString);
+	var results = await connection.QueryAsync<Fortune>("SELECT id, message FROM fortune ORDER BY id");
+    return Ok(results);
+}
+
+get "multiple" Ok<World[]> ()
+{
+	using var connection = new NpgsqlConnection(connectionString);
+	var item = await connection.QuerySingleAsync<World>("SELECT id, randomnumber FROM world WHERE id = 260");
+	var results = await connection.QueryAsync<World>("SELECT id, randomnumber FROM world WHERE randomnumber > @RandomNumber ORDER BY id", item);
+	return Ok(results);
+}
