@@ -1,0 +1,207 @@
+=====================================================================================
+ASP.NET 5 - 47 LOC
+=====================================================================================
+
+Bombarding http://localhost:5000/text for 30s using 100 connection(s)
+Statistics        Avg      Stdev        Max
+  Reqs/sec    141382.26   36934.16  205635.97
+  Latency      702.15us   737.36us    53.86ms
+  HTTP codes:
+    1xx - 0, 2xx - 4242554, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 0
+  Throughput:    25.35MB/s
+
+Bombarding http://localhost:5000/json for 30s using 100 connection(s)
+Statistics        Avg      Stdev        Max
+  Reqs/sec    112291.95   26825.73  176490.30
+  Latency        0.89ms   759.05us    54.03ms
+  HTTP codes:
+    1xx - 0, 2xx - 3363320, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 0
+  Throughput:    27.48MB/s
+
+Bombarding http://localhost:5000/single for 30s using 100 connection(s)
+Statistics        Avg      Stdev        Max
+  Reqs/sec     28301.51    6710.73   47083.96
+  Latency        3.53ms   734.30us    52.56ms
+  HTTP codes:
+    1xx - 0, 2xx - 848954, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 0
+  Throughput:    31.36MB/s
+
+Bombarding http://localhost:5000/multiple for 30s using 100 connection(s)
+Statistics        Avg      Stdev        Max
+  Reqs/sec      3382.57    1042.36    7396.99
+  Latency       29.56ms    32.65ms   465.87ms
+  HTTP codes:
+    1xx - 0, 2xx - 101514, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 0
+  Throughput:     1.77MB/s
+
+=====================================================================================
+Fiber - 42 LOC
+=====================================================================================
+
+Bombarding http://localhost:5000/text for 30s using 100 connection(s)
+Statistics        Avg      Stdev        Max
+  Reqs/sec    183679.82   45649.20  279046.32
+  Latency      539.96us   405.47us    43.77ms
+  HTTP codes:
+    1xx - 0, 2xx - 5519997, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 0
+  Throughput:    34.04MB/s
+
+Bombarding http://localhost:5000/json for 30s using 100 connection(s)
+Statistics        Avg      Stdev        Max
+  Reqs/sec    177097.82   43523.09  277226.32
+  Latency      557.88us   685.06us    56.80ms
+  HTTP codes:
+    1xx - 0, 2xx - 5317855, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 0
+  Throughput:    34.82MB/s
+
+Bombarding http://localhost:5000/single for 30s using 100 connection(s)
+Statistics        Avg      Stdev        Max
+  Reqs/sec     24432.80    6548.15   37751.25
+  Latency        3.07ms   735.70us    29.86ms
+  HTTP codes:
+    1xx - 0, 2xx - 733055, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 0
+  Throughput:    26.35MB/s
+
+Bombarding http://localhost:5000/multiple for 30s using 100 connection(s)
+Statistics        Avg      Stdev        Max
+  Reqs/sec      3144.70     778.73    5253.25
+  Latency       23.84ms    10.72ms   210.54ms
+  HTTP codes:
+    1xx - 0, 2xx - 94405, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 0
+  Throughput:     1.50MB/s
+
+=====================================================================================
+Node - LOC 22
+=====================================================================================
+
+Bombarding http://localhost:5000/text for 30s using 100 connection(s)
+Statistics        Avg      Stdev        Max
+  Reqs/sec     16763.87    3695.87   29147.36
+  Latency        5.96ms     2.11ms   115.61ms
+  HTTP codes:
+    1xx - 0, 2xx - 502922, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 0
+  Throughput:     4.86MB/s
+
+Bombarding http://localhost:5000/json for 30s using 100 connection(s)
+Statistics        Avg      Stdev        Max
+  Reqs/sec     15897.76    3380.73   25837.38
+  Latency        6.29ms     1.78ms    83.55ms
+  HTTP codes:
+    1xx - 0, 2xx - 476976, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 0
+  Throughput:     5.05MB/s
+
+Bombarding http://localhost:5000/single for 30s using 100 connection(s)
+Statistics        Avg      Stdev        Max
+  Reqs/sec      7055.47    1253.22   11723.00
+  Latency       14.17ms     6.12ms   127.46ms
+  HTTP codes:
+    1xx - 0, 2xx - 211730, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 0
+  Throughput:     8.34MB/s
+
+Bombarding http://localhost:5000/multiple for 30s using 100 connection(s)
+Statistics        Avg      Stdev        Max
+  Reqs/sec      2321.18     592.35    4521.14
+  Latency       43.08ms    20.39ms   311.71ms
+  HTTP codes:
+    1xx - 0, 2xx - 69677, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 0
+  Throughput:     1.39MB/s
+
+=====================================================================================
+Flask - 50 LOC
+=====================================================================================
+
+Bombarding http://localhost:5000/text for 30s using 100 connection(s)
+Statistics        Avg      Stdev        Max
+  Reqs/sec      4073.93    1123.88    6458.73
+  Latency       24.54ms    64.43ms     10.00s
+  HTTP codes:
+    1xx - 0, 2xx - 122251, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 4
+  Errors:
+    the server closed connection before returning the first response byte. Make sure the server returns 'Connection: close' response header before closing the connection - 4
+  Throughput:   839.46KB/s
+
+Bombarding http://localhost:5000/json for 30s using 100 connection(s)
+Statistics        Avg      Stdev        Max
+  Reqs/sec      3430.10    1294.50    5308.26
+  Latency       29.15ms    76.64ms     10.00s
+  HTTP codes:
+    1xx - 0, 2xx - 102921, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 6
+  Errors:
+    the server closed connection before returning the first response byte. Make sure the server returns 'Connection: close' response header before closing the connection - 6
+  Throughput:   753.75KB/s
+
+Bombarding http://localhost:5000/single for 30s using 100 connection(s)
+Statistics        Avg      Stdev        Max
+  Reqs/sec      1022.11    1296.39    4912.53
+  Latency       97.74ms   148.25ms     10.00s
+  HTTP codes:
+    1xx - 0, 2xx - 30705, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 6
+  Errors:
+    the server closed connection before returning the first response byte. Make sure the server returns 'Connection: close' response header before closing the connection - 6
+  Throughput:     1.15MB/s
+
+Bombarding http://localhost:5000/multiple for 30s using 100 connection(s)
+Statistics        Avg      Stdev        Max
+  Reqs/sec       606.36     961.28    4651.05
+  Latency      164.52ms   225.80ms     10.00s
+  HTTP codes:
+    1xx - 0, 2xx - 18244, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 6
+  Errors:
+    the server closed connection before returning the first response byte. Make sure the server returns 'Connection: close' response header before closing the connection - 6
+  Throughput:   307.49KB/s
+
+=====================================================================================
+Express.NET - 21 LOC
+=====================================================================================
+
+Bombarding http://localhost:5000/text for 30s using 100 connection(s)
+Statistics        Avg      Stdev        Max
+  Reqs/sec    113322.81   25592.78  182347.48
+  Latency        0.88ms   783.85us    48.09ms
+  HTTP codes:
+    1xx - 0, 2xx - 3394503, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 0
+  Throughput:    25.57MB/s
+
+Bombarding http://localhost:5000/json for 30s using 100 connection(s)
+Statistics        Avg      Stdev        Max
+  Reqs/sec    108904.67   23710.63  179401.93
+  Latency        0.91ms   758.20us    54.79ms
+  HTTP codes:
+    1xx - 0, 2xx - 3267458, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 0
+  Throughput:    26.69MB/s
+
+Bombarding http://localhost:5000/single for 30s using 100 connection(s)
+Statistics        Avg      Stdev        Max
+  Reqs/sec     28782.23    6916.30   47286.87
+  Latency        3.47ms   780.27us    50.99ms
+  HTTP codes:
+    1xx - 0, 2xx - 863400, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 0
+  Throughput:    31.89MB/s
+
+Bombarding http://localhost:5000/multiple for 30s using 100 connection(s)
+Statistics        Avg      Stdev        Max
+  Reqs/sec      3287.95     925.63    7594.34
+  Latency       30.41ms    35.31ms   470.76ms
+  HTTP codes:
+    1xx - 0, 2xx - 98683, 3xx - 0, 4xx - 0, 5xx - 0
+    others - 0
+  Throughput:     1.72MB/s
